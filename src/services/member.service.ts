@@ -33,7 +33,7 @@ export class MemberService {
     //   this.placeholderMembers.filter(item => item.id === id)[0] ?? null
     // ));
   }
-  getStdById(id: string): Promise<MemberEnseignant> {
+  getEnsById(id: string): Promise<MemberEnseignant> {
     return this.httpClient.get<MemberEnseignant>(`http://localhost:9999/membreservice/fullmember/${id}`).toPromise();
    // return new Promise(resolve => resolve(
    //   this.placeholderMembers.filter(item => item.id === id)[0] ?? null

@@ -1,16 +1,18 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from "./main/dashboard/dashboard.component";
-import {MemberListComponent} from "./main/member/member-list/member-list.component";
-import {MemberFormComponent} from "./main/member/member-form/member-form.component";
-import {LoginComponent} from "./auth/login/login.component";
-import {AuthGuard} from "../services/auth.guard";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './main/dashboard/dashboard.component';
+import { MemberListComponent } from './main/member/member-list/member-list.component';
+import { MemberFormComponent } from './main/member/member-form/member-form.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from '../services/auth.guard';
 import { ToolsListComponent } from './main/tools/tools-list/tools-list.component';
 import { ToolsFormComponent } from './main/tools/tools-form/tools-form.component';
 import { ArticleListComponent } from './main/articles/article-list/article-list.component';
 import { ArticleFormComponent } from './main/articles/article-form/article-form.component';
 import { EventsListComponent } from './main/events/events-list/events-list.component';
 import { EventsFormComponent } from './main/events/events-form/events-form.component';
+import { MemberInfoComponent } from './main/member/member-info/member-info.component';
+import { MemberInfoTeacherComponent } from './main/member/member-info-teacher/member-info-teacher.component';
 
 const routes: Routes = [
   {
@@ -50,10 +52,33 @@ const routes: Routes = [
         component: MemberFormComponent,
       },
       {
+        path: ':id/teacher',
+        pathMatch: 'full',
+        component: MemberInfoTeacherComponent,
+      },
+      {
+        path: ':id/info',
+
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: MemberInfoComponent,
+          },
+          {
+            path: ':id/teacher',
+            pathMatch: 'full',
+            component: MemberInfoTeacherComponent,
+          },
+        ],
+      },
+      {
         path: '**',
         redirectTo: '',
       }
-    ]
+    ],
   },
   {
     path: 'tools',
@@ -78,8 +103,8 @@ const routes: Routes = [
       {
         path: '**',
         redirectTo: '',
-      }
-    ]
+      },
+    ],
   },
   {
     path: 'articles',
@@ -104,8 +129,8 @@ const routes: Routes = [
       {
         path: '**',
         redirectTo: '',
-      }
-    ]
+      },
+    ],
   },
   {
     path: 'events',
@@ -130,10 +155,10 @@ const routes: Routes = [
       {
         path: '**',
         redirectTo: '',
-      }
-    ]
+      },
+    ],
   },
-  
+
   {
     path: '**',
     redirectTo: 'dashboard',
@@ -142,7 +167,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

@@ -19,6 +19,9 @@ import { ArticleFormComponent } from './main/articles/article-form/article-form.
 import { ArticleListComponent } from './main/articles/article-list/article-list.component';
 import { EventsFormComponent } from './main/events/events-form/events-form.component';
 import { EventsListComponent } from './main/events/events-list/events-list.component';
+import { MemberInfoComponent } from './main/member/member-info/member-info.component';
+import { MemberInfoTeacherComponent } from './main/member/member-info-teacher/member-info-teacher.component';
+
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import { EventsListComponent } from './main/events/events-list/events-list.compo
     ArticleListComponent,
     EventsFormComponent,
     EventsListComponent,
+    MemberInfoComponent,
+    MemberInfoTeacherComponent,
+
 
   ],
   imports: [

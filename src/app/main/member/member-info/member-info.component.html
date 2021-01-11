@@ -1,0 +1,129 @@
+<p>member-info works!</p>
+
+<div *ngIf="etudiantItem" >
+
+<p>{{etudiantItem.nom}}</p>
+<p>{{etudiantItem.prenom}}</p>
+<p>{{etudiantItem.cin}}</p>
+<p>{{etudiantItem.date}}</p>
+
+
+<p>{{etudiantItem.email}}</p>
+
+<div  *ngIf="!etudiantItem.pubs">
+<p>pubs</p>
+
+<table mat-table [dataSource]="etudiantItem.pubs" class="mat-elevation-z8 w-100-p">
+   
+    <ng-container matColumnDef="titre">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> titre</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.titre}} </td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="type">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> type</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dateApparition">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> dateApparition</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.dateApparition}} </td>
+    </ng-container>
+  
+   
+    
+    
+    
+    <ng-container matColumnDef="lien">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> lien</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.lien}} </td>
+    </ng-container>
+    <ng-container matColumnDef="sourcePdf">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> sourcePdf</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.sourcePdf}} </td>
+    </ng-container>
+    
+
+    <tr mat-header-row *matHeaderRowDef="pubs"></tr>
+    <tr mat-row *matRowDef="let row; columns: pubs;"></tr>
+  </table>
+
+</div>
+ <div  *ngIf="!etudiantItem.outils">
+<p>outils</p>
+
+<table mat-table  [dataSource]="etudiantItem.outils" class="mat-elevation-z8 w-100-p">
+   
+    <ng-container matColumnDef="date">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> date</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="source">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> source</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.source}} </td>
+    </ng-container>
+  
+   
+    
+  
+    
+
+    <tr mat-header-row *matHeaderRowDef="outils"></tr>
+    <tr mat-row *matRowDef="let row; columns: outils;"></tr>
+  </table>
+</div> 
+<div  *ngIf="!etudiantItem.evenements">
+  <p>evenements</p>
+
+<table mat-table [dataSource]="etudiantItem.evenements" class="mat-elevation-z8 w-100-p">
+   
+    <ng-container matColumnDef="title">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> title</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="date">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> date</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="lieu">
+        <th mat-header-cell class="px-12" *matHeaderCellDef> lieu</th>
+        <td mat-cell class="px-12" *matCellDef="let element"> {{element.lieu}} </td>
+      </ng-container>
+    
+   
+    
+  
+    
+
+    <tr mat-header-row *matHeaderRowDef="evenements"></tr>
+    <tr mat-row *matRowDef="let row; columns: evenements;"></tr>
+  </table>
+</div>
+<div  *ngIf="enseignantItem">
+  <p>encadrant</p>
+
+  <p> {{enseignantItem.nom}} </p>
+  <p> {{enseignantItem.prenom}} </p>
+  <p> {{enseignantItem.email}} </p>
+  <button mat-icon-button [routerLink]="enseignantItem.id + '/teacher'">
+    <mat-icon>info</mat-icon>
+  </button>
+  <button mat-icon-button [routerLink]="enseignantItem.id + '/edit'">
+    <mat-icon>edit</mat-icon>
+  </button>
+ 
+  
+
+
+</div>
+<div  *ngIf="enseignantItem==null">
+  <button mat-icon-button [routerLink]=" '/teacher'">
+  <mat-icon>add_circle</mat-icon>
+</button>
+ </div>
+
+</div>
