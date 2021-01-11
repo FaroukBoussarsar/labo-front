@@ -9,11 +9,23 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="name" formControlName="name">
+      <input matInput placeholder="nom" formControlName="nom">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="prenom" formControlName="prenom">
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName='date'>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="cv" formControlName="cv">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="email" formControlName="email">
     </mat-form-field>
 
 
@@ -27,7 +39,8 @@
         <mat-option value="TEACHER">TEACHER</mat-option>
       </mat-select>
     </mat-form-field>
-
+  
+    <form [formGroup]="formTeacher"  (ngSubmit)="onSubmit()" class="form" fxLayout="column">
     <mat-form-field *ngIf="type==='TEACHER'">
       <input matInput placeholder="grade" formControlName="grade">
     </mat-form-field>
@@ -35,20 +48,28 @@
     <mat-form-field  *ngIf="type==='TEACHER'">
       <input matInput placeholder="etablissement" formControlName="etablissement">
     </mat-form-field>
-    
-    <mat-form-field  *ngIf="type==='STUDENT'">
+ 
+  <form [formGroup]="formStudent"  (ngSubmit)="onSubmit()" class="form" fxLayout="column">
+    <!-- <mat-form-field  *ngIf="type==='STUDENT'">
       <input matInput placeholder="dateInscription" formControlName="dateInscription">
+    </mat-form-field> -->
+    <mat-form-field appearance="fill" *ngIf="type==='STUDENT'">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName='dateInscription'>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     
     <mat-form-field  *ngIf="type==='STUDENT'">
       <input matInput placeholder="diplome" formControlName="diplome">
     </mat-form-field>
-
+  
 
 
     <div class="form-element">
       <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
     </div>
-
   </form>
+  </form> </form>
+  
 </div>

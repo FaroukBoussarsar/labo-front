@@ -45,7 +45,7 @@ export class MemberService {
    * a new member doesn't have an id
    */
   saveEtd(member: any): Promise<MemberEtudiant> {
-    return this.httpClient.post<MemberEtudiant>('http://localhost:9999/membreservice/membres', member).toPromise();
+    return this.httpClient.post<MemberEtudiant>('http://localhost:9999/membreservice/membres/etd', member).toPromise();
     // const memberToSave = {
     //   id: member.id ?? Utils.fakeNumber().toString(),
     //   createdDate: member.createdDate ?? new Date().toISOString(), ...member
@@ -55,7 +55,7 @@ export class MemberService {
     // return new Promise(resolve => resolve(memberToSave));
   }
   saveEns(member: any): Promise<MemberEnseignant> {
-    return this.httpClient.post<MemberEnseignant>('http://localhost:9999/membreservice/membres', member).toPromise();
+    return this.httpClient.post<MemberEnseignant>('http://localhost:9999/membreservice//membres/ens', member).toPromise();
     // const memberToSave = {
     //   id: member.id ?? Utils.fakeNumber().toString(),
     //   createdDate: member.createdDate ?? new Date().toISOString(), ...member

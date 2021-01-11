@@ -11,6 +11,14 @@ export interface Member {
   pubs:[],
   outils:[],
   evenements:[]
+  
+  dateInscription:string,
+  diplome:string,
+  
+  encadrant:MemberEnseignant,
+  
+  grade:string,
+  etablissement:string
 }
 export interface MemberEtudiant {
   id: string,

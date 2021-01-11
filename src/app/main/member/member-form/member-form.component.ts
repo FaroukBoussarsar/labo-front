@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MemberService} from "../../../../services/member.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Member} from "../../../../models/memeber.model";
+import {Member,MemberEtudiant,MemberEnseignant} from "../../../../models/memeber.model";
 
 
 @Component({
@@ -12,8 +12,10 @@ import {Member} from "../../../../models/memeber.model";
 })
 export class MemberFormComponent implements OnInit {
   currentItemId: string;
-  item: Member;
-  form: FormGroup;
+  item: any;
+  formStudent: FormGroup;
+  formTeacher: FormGroup;
+  form:FormGroup;
   type:any;
 
   constructor(
@@ -36,27 +38,52 @@ export class MemberFormComponent implements OnInit {
     }
   }
 
-  initForm(item: Member) {
-    // if( item===null){
-    //   this.type='TEACHER'
-    // }
-    // else{
-    //   this.type=item.type
-    // }
+  initForm(item: any) {
+    if(item===null){
+      this.type='STUDENT'
+    }
+    else if( item.diplome){
+      this.type='STUDENT'
+    }
+    else if(item.grade){
+      this.type='TEACHER'
+    }
     
-   
-  
+    console.log(this.type);
+    
     this.form = new FormGroup({
 
       cin: new FormControl(item?.cin, [Validators.required]),
-      // name: new FormControl(item?.name, [Validators.required]),
+      nom: new FormControl(item?.nom, [Validators.required]),
+      prenom: new FormControl(item?.prenom, [Validators.required]),
+      date: new FormControl(item?.date, [Validators.required]),
       cv: new FormControl(item?.cv, [Validators.required]),
+      email: new FormControl(item?.email, [Validators.required]),
    
-      
-      // dateInscription: new FormControl(item?.dateInscription, [Validators.required]),
-      // diplome: new FormControl(item?.diplome, [Validators.required]),
-      // grade: new FormControl(item?.grade,[Validators.required]),
-      // etablissement: new FormControl(item?.etablissement, [Validators.required]),
+    }); 
+
+    this.formTeacher = new FormGroup({
+
+
+      grade: new FormControl(item?.grade, 
+          [Validators.required]
+          ), 
+      etablissement: new FormControl(item?.etablissement,
+        [Validators.required]
+         ),
+
+    });
+  
+    this.formStudent = new FormGroup({
+
+   
+ dateInscription: new FormControl(item?.dateInscription,
+   [Validators.required]
+  ),
+      diplome: new FormControl(item?.diplome,
+        [Validators.required]
+        ),
+    
 
     });
   }
@@ -67,9 +94,26 @@ export class MemberFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const objectToSubmit: Member = {...this.item, ...this.form.value};
-    console.log(objectToSubmit);
-    this.memberService.saveEns(objectToSubmit).then(() => this.router.navigate(['./members']));
+    // const objectToSubmit: Member = {...this.item, ...this.form.value};
+    // console.log(objectToSubmit);
+    // if(this.type==='TEACHER'){
+    //   this.memberService.saveEns(objectToSubmit).then(() => this.router.navigate(['./members']));
+    // }
+    // else{
+    //   this.memberService.saveEtd(objectToSubmit).then(() => this.router.navigate(['./members']));
+    // }
+
+    if(this.type==='TEACHER'){
+      const objectToSubmit: MemberEnseignant  = {...this.item,...this.form.value, ...this.formTeacher.value};
+      console.log(objectToSubmit);
+      this.memberService.saveEns(objectToSubmit).then(() => this.router.navigate(['./members']));
+    }
+    else if(this.type==='STUDENT'){
+      const objectToSubmit:MemberEtudiant  = {...this.item, ...this.form.value, ...this.formStudent.value};
+      console.log(objectToSubmit);
+      this.memberService.saveEtd(objectToSubmit).then(() => this.router.navigate(['./members']));
+    }
+   
 
   }
 }

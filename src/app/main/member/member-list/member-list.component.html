@@ -52,6 +52,7 @@
     <td mat-cell class="px-12" *matCellDef="let element"> {{element.diplome}} </td>
   </ng-container>
   
+  
   <ng-container matColumnDef="dateInscription">
     <th mat-header-cell class="px-12" *matHeaderCellDef> dateInscription</th>
     <td mat-cell class="px-12" *matCellDef="let element">
@@ -73,9 +74,18 @@
       <button mat-icon-button [routerLink]="element.id + '/edit'">
         <mat-icon>edit</mat-icon>
       </button>
+     
+      <button mat-icon-button [routerLink]="element.id + '/info'">
+        <mat-icon>info</mat-icon>
+      </button>
+      <button mat-icon-button [routerLink]="element.id + '/add'">
+        <mat-icon>add_circle
+        </mat-icon>
+      </button>
       <button mat-icon-button color="warn" (click)="onRemoveAccount(element.id)">
         <mat-icon>delete</mat-icon>
       </button>
+     
 
     </td>
   </ng-container>
@@ -150,6 +160,14 @@
     <td mat-cell class="px-12 w-120" *matCellDef="let element">
       <button mat-icon-button [routerLink]="element.id + '/edit'">
         <mat-icon>edit</mat-icon>
+      </button>
+     
+      <button mat-icon-button [routerLink]="element.id + '/info'">
+        <mat-icon>info</mat-icon>
+      </button>
+      <button mat-icon-button [routerLink]="element.id + '/add'">
+        <mat-icon>add_circle
+        </mat-icon>
       </button>
       <button mat-icon-button color="warn" (click)="onRemoveAccount(element.id)">
         <mat-icon>delete</mat-icon>
