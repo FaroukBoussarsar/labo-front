@@ -13,6 +13,13 @@ import {FirebaseModule} from "../@root/firebase/firebase.module";
 import {LoginComponent} from './auth/login/login.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptor} from 'src/services/token.interceptor';
+import { ToolsFormComponent } from './main/tools/tools-form/tools-form.component';
+import { ToolsListComponent } from './main/tools/tools-list/tools-list.component';
+import { ArticleFormComponent } from './main/articles/article-form/article-form.component';
+import { ArticleListComponent } from './main/articles/article-list/article-list.component';
+import { EventsFormComponent } from './main/events/events-form/events-form.component';
+import { EventsListComponent } from './main/events/events-list/events-list.component';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +29,13 @@ import {TokenInterceptor} from 'src/services/token.interceptor';
     MemberListComponent,
     MemberFormComponent,
     LoginComponent,
+    ToolsFormComponent,
+    ToolsListComponent,
+    ArticleFormComponent,
+    ArticleListComponent,
+    EventsFormComponent,
+    EventsListComponent,
+
   ],
   imports: [
     BrowserModule,

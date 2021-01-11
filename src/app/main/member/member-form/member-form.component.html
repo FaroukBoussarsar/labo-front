@@ -16,9 +16,35 @@
       <input matInput placeholder="cv" formControlName="cv">
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="type" formControlName="type">
+
+    <mat-form-field appearance="fill" >
+
+
+      <mat-label>Select</mat-label>
+      <mat-select [(value)]="type">
+        <mat-option value="" disabled selected></mat-option>
+        <mat-option value="STUDENT">STUDENT</mat-option>
+        <mat-option value="TEACHER">TEACHER</mat-option>
+      </mat-select>
     </mat-form-field>
+
+    <mat-form-field *ngIf="type==='TEACHER'">
+      <input matInput placeholder="grade" formControlName="grade">
+    </mat-form-field>
+    
+    <mat-form-field  *ngIf="type==='TEACHER'">
+      <input matInput placeholder="etablissement" formControlName="etablissement">
+    </mat-form-field>
+    
+    <mat-form-field  *ngIf="type==='STUDENT'">
+      <input matInput placeholder="dateInscription" formControlName="dateInscription">
+    </mat-form-field>
+    
+    <mat-form-field  *ngIf="type==='STUDENT'">
+      <input matInput placeholder="diplome" formControlName="diplome">
+    </mat-form-field>
+
+
 
     <div class="form-element">
       <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>

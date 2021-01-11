@@ -4,6 +4,7 @@ import {MemberService} from "../../../../services/member.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Member} from "../../../../models/memeber.model";
 
+
 @Component({
   selector: 'app-member-form',
   templateUrl: './member-form.component.html',
@@ -13,6 +14,7 @@ export class MemberFormComponent implements OnInit {
   currentItemId: string;
   item: Member;
   form: FormGroup;
+  type:any;
 
   constructor(
     private router: Router,
@@ -24,22 +26,38 @@ export class MemberFormComponent implements OnInit {
   ngOnInit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
     if (!!this.currentItemId) {
-      this.memberService.getMemberById(this.currentItemId).then(item => {
+      this.memberService.getEtdById(this.currentItemId).then(item => {
         this.item = item;
         this.initForm(item)
       });
     } else {
+ 
       this.initForm(null);
     }
   }
 
   initForm(item: Member) {
+    // if( item===null){
+    //   this.type='TEACHER'
+    // }
+    // else{
+    //   this.type=item.type
+    // }
+    
+   
+  
     this.form = new FormGroup({
 
       cin: new FormControl(item?.cin, [Validators.required]),
-      name: new FormControl(item?.name, [Validators.required]),
+      // name: new FormControl(item?.name, [Validators.required]),
       cv: new FormControl(item?.cv, [Validators.required]),
-      type: new FormControl(item?.type, [Validators.required]),
+   
+      
+      // dateInscription: new FormControl(item?.dateInscription, [Validators.required]),
+      // diplome: new FormControl(item?.diplome, [Validators.required]),
+      // grade: new FormControl(item?.grade,[Validators.required]),
+      // etablissement: new FormControl(item?.etablissement, [Validators.required]),
+
     });
   }
 
@@ -51,7 +69,7 @@ export class MemberFormComponent implements OnInit {
   onSubmit(): void {
     const objectToSubmit: Member = {...this.item, ...this.form.value};
     console.log(objectToSubmit);
-    this.memberService.saveMember(objectToSubmit).then(() => this.router.navigate(['./members']));
+    this.memberService.saveEns(objectToSubmit).then(() => this.router.navigate(['./members']));
 
   }
 }
