@@ -1,17 +1,37 @@
-<p>member-info works!</p>
+
 
 <div *ngIf="etudiantItem" >
+  <mat-card class="example-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+   
+   
+    <div style="display: flex;justify-content: space-between;">
+      <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> FULL NAME </p>
+  <p>{{etudiantItem.nom}} {{etudiantItem.prenom}}</p>
 
-<p>{{etudiantItem.nom}}</p>
-<p>{{etudiantItem.prenom}}</p>
+  </div>
+   
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> CIN </p>
 <p>{{etudiantItem.cin}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> DATE </p>
 <p>{{etudiantItem.date}}</p>
-
-
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> EMAIL </p>
 <p>{{etudiantItem.email}}</p>
-
-<div  *ngIf="!etudiantItem.pubs">
-<p>pubs</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> DIPLOME </p>
+<p>{{etudiantItem.diplome}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> DATE D'INSCRIPTION </p>
+<p>{{etudiantItem.dateInscription}}</p>
+  </div>
+<div  *ngIf="etudiantItem.pubs.length>0">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">PUBS</p>
 
 <table mat-table [dataSource]="etudiantItem.pubs" class="mat-elevation-z8 w-100-p">
    
@@ -49,8 +69,8 @@
   </table>
 
 </div>
- <div  *ngIf="!etudiantItem.outils">
-<p>outils</p>
+ <div  *ngIf="etudiantItem.outils.length>0">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">outils</p>
 
 <table mat-table  [dataSource]="etudiantItem.outils" class="mat-elevation-z8 w-100-p">
    
@@ -74,8 +94,8 @@
     <tr mat-row *matRowDef="let row; columns: outils;"></tr>
   </table>
 </div> 
-<div  *ngIf="!etudiantItem.evenements">
-  <p>evenements</p>
+<div  *ngIf="etudiantItem.evenements.length>0">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">evenements</p>
 
 <table mat-table [dataSource]="etudiantItem.evenements" class="mat-elevation-z8 w-100-p">
    
@@ -104,26 +124,37 @@
   </table>
 </div>
 <div  *ngIf="enseignantItem">
-  <p>encadrant</p>
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">Encadrant</p>
+<div   style="display: flex;justify-content: space-between;">
+ 
+ <div  style="display: flex;justify-content: space-between;">
+  
 
-  <p> {{enseignantItem.nom}} </p>
+  <p> {{enseignantItem.nom}} </p></div>
   <p> {{enseignantItem.prenom}} </p>
   <p> {{enseignantItem.email}} </p>
+  <mat-card-footer>
   <button mat-icon-button [routerLink]="enseignantItem.id + '/teacher'">
     <mat-icon>info</mat-icon>
   </button>
-  <button mat-icon-button [routerLink]="enseignantItem.id + '/edit'">
+  <button mat-icon-button [routerLink]="etudiantItem.id + '/affecterteacher'">
     <mat-icon>edit</mat-icon>
   </button>
+  <button mat-icon-button color="warn" (click)="onRemoveAccount(etudiantItem.id)">
+    <mat-icon>delete</mat-icon>
+  </button>
  
-  
+  </mat-card-footer>
 
 
 </div>
-<div  *ngIf="enseignantItem==null">
-  <button mat-icon-button [routerLink]=" '/teacher'">
+</div>
+<div  *ngIf="enseignantItem==null"  style="display: flex;justify-content: space-between; align-self:  center;">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">Encadrant</p>
+ 
+  <button mat-icon-button  color="primary"  [routerLink]="etudiantItem.id + '/affecterteacher'">
   <mat-icon>add_circle</mat-icon>
 </button>
  </div>
-
+</mat-card>
 </div>

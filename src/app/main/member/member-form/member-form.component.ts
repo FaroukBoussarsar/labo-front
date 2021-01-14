@@ -49,7 +49,7 @@ export class MemberFormComponent implements OnInit {
       this.type='TEACHER'
     }
     
-    console.log(this.type);
+
     
     this.form = new FormGroup({
 
@@ -105,12 +105,12 @@ export class MemberFormComponent implements OnInit {
 
     if(this.type==='TEACHER'){
       const objectToSubmit: MemberEnseignant  = {...this.item,...this.form.value, ...this.formTeacher.value};
-      console.log(objectToSubmit);
+
       this.memberService.saveEns(objectToSubmit).then(() => this.router.navigate(['./members']));
     }
     else if(this.type==='STUDENT'){
       const objectToSubmit:MemberEtudiant  = {...this.item, ...this.form.value, ...this.formStudent.value};
-      console.log(objectToSubmit);
+
       this.memberService.saveEtd(objectToSubmit).then(() => this.router.navigate(['./members']));
     }
    

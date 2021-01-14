@@ -38,25 +38,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
   private fetchDataSource(): void {
     this.memberService.getAllEtd().then(data => this.dataSourceEtudiant=data );
     this.memberService.getAllEns().then(data => this.dataSourceEnseignant=data );
-      // let array =data.filter(e=>e.etablissement==='STUDENT')
-     
-      // this.dataSourceStudent = array
 
-      // let array2 =data.filter(e=>e.type==='TEACHER')
-
-      // this.dataSourceTeacher = array2
-//        data.map (e =>{
-       
-//         if ( e.etablissement  ){
-//           console.log(e);
-          
-//             this.dataSourceTeacher.push(e)
-//         }
-//         else this.dataSourceStudent.push(e)
-//     })
-
-console.log(this.dataSourceEnseignant);
-console.log(this.dataSourceEtudiant);
     
     
    
@@ -72,7 +54,7 @@ console.log(this.dataSourceEtudiant);
     dialogRef.componentInstance.confirmButtonColor = 'warn';
 
     dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
-      console.log('removing: ', isDeleteConfirmed);
+
       if (isDeleteConfirmed) {
         this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
       }

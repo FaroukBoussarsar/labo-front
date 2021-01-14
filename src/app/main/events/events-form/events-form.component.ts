@@ -50,7 +50,7 @@ export class EventsFormComponent implements OnInit {
 
   onSubmit(): void {
     const objectToSubmit: Event = {...this.item, ...this.form.value};
-    console.log(objectToSubmit);
+
     this.eventService.saveEvent(objectToSubmit).then(() => this.router.navigate(['./events']));
 
   }

@@ -50,7 +50,7 @@ export class ToolsFormComponent implements OnInit {
 
   onSubmit(): void {
     const objectToSubmit: Tool = {...this.item, ...this.form.value};
-    console.log(objectToSubmit);
+
     this.toolService.saveTool(objectToSubmit).then(() => this.router.navigate(['./tools']));
 
   }

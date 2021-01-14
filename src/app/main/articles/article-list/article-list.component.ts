@@ -46,7 +46,7 @@ export class ArticleListComponent implements OnInit {
    dialogRef.componentInstance.confirmButtonColor = 'warn';
 
    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
-     console.log('removing: ', isDeleteConfirmed);
+
      if (isDeleteConfirmed) {
        this.articleService.removeArticleById(id).then(() => this.fetchDataSource());
      }

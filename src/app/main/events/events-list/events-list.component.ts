@@ -47,7 +47,7 @@ export class EventsListComponent implements OnInit {
    dialogRef.componentInstance.confirmButtonColor = 'warn';
 
    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
-     console.log('removing: ', isDeleteConfirmed);
+
      if (isDeleteConfirmed) {
        this.eventService.removeEventById(id).then(() => this.fetchDataSource());
      }

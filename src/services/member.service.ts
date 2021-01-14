@@ -3,6 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {GLOBAL} from "../app/app-config";
 import {Utils} from "../utils/utils";
 import {MemberEtudiant,MemberEnseignant,Member} from "../models/memeber.model";
+import { Tool } from 'src/models/tool.model';
+import { Article } from 'src/models/article.model';
+import { Event } from 'src/models/event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -69,11 +72,11 @@ export class MemberService {
 
   affecterEnsToEtd(idetd:string,idens:string): Promise<Member> {
 
-    return this.httpClient.put<Member>(`http://localhost:9999/membreservice/membres/${idetd}/${idens}`,{}).toPromise();
+    return this.httpClient.put<Member>(`http://localhost:9999/membreservice/membres/etudiant/${idetd}/${idens}`,{}).toPromise();
   }
   affecterOutil(idetd:string,idens:string): Promise<Member> {
 
-    return this.httpClient.put<Member>(`http://localhost:9999/membreservice/membres/affecteroutil/${idetd}/${idens}`,{}).toPromise();
+    return this.httpClient.put<Member>(`http://localhost:9999/membreservice/membres/affecteroutils/${idetd}/${idens}`,{}).toPromise();
   }
   affecterEvt(idetd:string,idens:string): Promise<Member> {
 
@@ -89,5 +92,46 @@ export class MemberService {
     // this.placeholderMembers = this.placeholderMembers.filter(item => item.id !== id);
     // return new Promise(resolve => resolve());
   }
+  findOutilsById(id: string): Promise<Tool[]> {
+    return this.httpClient.get<Tool[]>(`http://localhost:9999/membreservice/outils/developpeur/${id}`).toPromise();
+   // return new Promise(resolve => resolve(
+   //   this.placeholderMembers.filter(item => item.id === id)[0] ?? null
+   // ));
+ }
+ findEventById(id: string): Promise<Event[]> {
+  return this.httpClient.get<Event[]>(`http://localhost:9999/membreservice/evenements/organisateur/${id}`).toPromise();
+ // return new Promise(resolve => resolve(
+ //   this.placeholderMembers.filter(item => item.id === id)[0] ?? null
+ // ));
+}
+findArticleById(id: string): Promise<Article[]> {
+  return this.httpClient.get<Article[]>(`http://localhost:9999/membreservice/publications/auteur/${id}`).toPromise();
+ // return new Promise(resolve => resolve(
+ //   this.placeholderMembers.filter(item => item.id === id)[0] ?? null
+ // ));
+}
+deleteEncadranttoEtudiant(idetd:string): Promise<Member> {
+
+  return this.httpClient.put<Member>(`http://localhost:9999/membreservice/membres/encadrant/delete/${idetd}`,{}).toPromise();
+}
+
+findOutilsdiifById(id: string): Promise<Tool[]> {
+  return this.httpClient.get<Tool[]>(`http://localhost:9999/membreservice/outildiff/${id}`).toPromise();
+ // return new Promise(resolve => resolve(
+ //   this.placeholderMembers.filter(item => item.id === id)[0] ?? null
+ // ));
+}
+findEventdiifById(id: string): Promise<Event[]> {
+return this.httpClient.get<Event[]>(`http://localhost:9999/membreservice/eventdiff/${id}`).toPromise();
+// return new Promise(resolve => resolve(
+//   this.placeholderMembers.filter(item => item.id === id)[0] ?? null
+// ));
+}
+findArticlediifById(id: string): Promise<Article[]> {
+return this.httpClient.get<Article[]>(`http://localhost:9999/membreservice/publicationsdiff/${id}`).toPromise();
+// return new Promise(resolve => resolve(
+//   this.placeholderMembers.filter(item => item.id === id)[0] ?? null
+// ));
+}
 
 }

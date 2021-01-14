@@ -48,7 +48,7 @@ export class ToolsListComponent implements OnInit {
    dialogRef.componentInstance.confirmButtonColor = 'warn';
 
    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
-     console.log('removing: ', isDeleteConfirmed);
+
      if (isDeleteConfirmed) {
        this.toolService.removeToolById(id).then(() => this.fetchDataSource());
      }

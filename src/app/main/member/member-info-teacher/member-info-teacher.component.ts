@@ -41,16 +41,16 @@ evenements:string[]=['title','date','lieu']
     // this.memberService.getAllEtd().then(data => this.dataSourceEtudiant=data );
     // this.memberService.getAllEns().then(data => this.dataSourceEnseignant=data );
     this.currentItemId = this.activatedRoute.snapshot.params.id;
-    console.log(this.activatedRoute.snapshot.params);
+
     
     if (!!this.currentItemId) {
     this.memberService.getEnsById(this.currentItemId).then(item => {
 
 
 
-      console.log(item);
+
    
-   console.log(this.enseignantItem);
+
    
       this.enseignantItem = item;
     
@@ -66,7 +66,7 @@ evenements:string[]=['title','date','lieu']
   private testtt(): void {
     // this.memberService.getAllEtd().then(data => this.dataSourceEtudiant=data );
     // this.memberService.getAllEns().then(data => this.dataSourceEnseignant=data );
-   console.log(this.etudiantItem,'lenna');
+ 
    
 
     

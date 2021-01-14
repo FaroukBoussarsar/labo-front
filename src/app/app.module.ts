@@ -21,6 +21,8 @@ import { EventsFormComponent } from './main/events/events-form/events-form.compo
 import { EventsListComponent } from './main/events/events-list/events-list.component';
 import { MemberInfoComponent } from './main/member/member-info/member-info.component';
 import { MemberInfoTeacherComponent } from './main/member/member-info-teacher/member-info-teacher.component';
+import { MemberAddComponent } from './main/member/member-add/member-add.component';
+import { MemberEncadrantComponent } from './main/member/member-encadrant/member-encadrant.component';
 
 
 
@@ -40,6 +42,8 @@ import { MemberInfoTeacherComponent } from './main/member/member-info-teacher/me
     EventsListComponent,
     MemberInfoComponent,
     MemberInfoTeacherComponent,
+    MemberAddComponent,
+    MemberEncadrantComponent,
 
 
   ],

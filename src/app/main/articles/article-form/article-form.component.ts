@@ -54,7 +54,7 @@ export class ArticleFormComponent implements OnInit {
 
   onSubmit(): void {
     const objectToSubmit: Member = {...this.item, ...this.form.value};
-    console.log(objectToSubmit);
+
     this.articleService.saveArticle(objectToSubmit).then(() => this.router.navigate(['./articles']));
 
   }

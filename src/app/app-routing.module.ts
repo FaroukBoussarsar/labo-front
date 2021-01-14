@@ -13,6 +13,8 @@ import { EventsListComponent } from './main/events/events-list/events-list.compo
 import { EventsFormComponent } from './main/events/events-form/events-form.component';
 import { MemberInfoComponent } from './main/member/member-info/member-info.component';
 import { MemberInfoTeacherComponent } from './main/member/member-info-teacher/member-info-teacher.component';
+import { MemberAddComponent } from './main/member/member-add/member-add.component';
+import { MemberEncadrantComponent } from './main/member/member-encadrant/member-encadrant.component';
 
 const routes: Routes = [
   {
@@ -47,6 +49,11 @@ const routes: Routes = [
         component: MemberFormComponent,
       },
       {
+        path: ':id/add',
+        pathMatch: 'full',
+        component: MemberAddComponent,
+      },
+      {
         path: ':id/edit',
         pathMatch: 'full',
         component: MemberFormComponent,
@@ -72,6 +79,14 @@ const routes: Routes = [
             pathMatch: 'full',
             component: MemberInfoTeacherComponent,
           },
+          {
+            path: ':id/affecterteacher',
+            pathMatch: 'full',
+            component: MemberEncadrantComponent,
+          },
+
+
+          
         ],
       },
       {

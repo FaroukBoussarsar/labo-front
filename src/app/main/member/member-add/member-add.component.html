@@ -1,0 +1,148 @@
+<div *ngIf="diffEvent">
+
+
+<p>event</p>
+
+
+<table mat-table [dataSource]="allEvent" class="mat-elevation-z8 w-100-p">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> ID</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="title">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> Titre</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="lieu">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> lieu</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.lieu}} </td>
+    </ng-container>
+  
+ 
+    <ng-container matColumnDef="date">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> Date</th>
+      <td mat-cell class="px-12" *matCellDef="let element">
+        {{element.date | date :'d MMMM y, HH:mm'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions" stickyEnd>
+      <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
+      <td mat-cell class="px-12 w-120" *matCellDef="let element">
+        <button mat-icon-button (click)="onSubmitEvt(element.id)">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      
+  
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="EventColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: EventColumns;"></tr>
+  </table>
+
+</div>
+
+<div *ngIf="allArticle">
+    <p>article</p>
+
+     
+  <table mat-table [dataSource]="allArticle" class="mat-elevation-z8 w-100-p">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> ID</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+   <!-- Weight Column -->
+   <ng-container matColumnDef="type">
+    <th mat-header-cell class="px-12" *matHeaderCellDef> Type</th>
+    <td mat-cell class="px-12" *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+    <ng-container matColumnDef="titre">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> Titre</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.titre}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="lien">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> Lien</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.lien}} </td>
+    </ng-container>
+  
+  
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="sourcePdf">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> source Pdf</th>
+      <td mat-cell class="px-12" *matCellDef="let element">
+        <a [href]="element.sourcePdf" target="_blank">
+          <mat-icon>picture_as_pdf</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> Date</th>
+      <td mat-cell class="px-12" *matCellDef="let element">
+        {{element.date | date :'d MMMM y, HH:mm'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions" stickyEnd>
+      <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
+      <td mat-cell class="px-12 w-120" *matCellDef="let element">
+        <button mat-icon-button (click)="onSubmitArticle(element.id)">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+     
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="ArticleColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: ArticleColumns;"></tr>
+  </table>
+  
+
+</div>
+
+<div *ngIf="allTools">   
+<p>tools</p>
+<table mat-table [dataSource]="allTools" class="mat-elevation-z8 w-100-p">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> ID</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+   
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="source">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> Source</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.source}} </td>
+    </ng-container>
+  
+ 
+    <ng-container matColumnDef="date">
+      <th mat-header-cell class="px-12" *matHeaderCellDef>Date</th>
+      <td mat-cell class="px-12" *matCellDef="let element">
+        {{element.date | date :'d MMMM y, HH:mm'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions" stickyEnd>
+      <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
+      <td mat-cell class="px-12 w-120" *matCellDef="let element">
+        <button mat-icon-button (click)="onSubmitTools(element.id)">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+    
+      </td>
+    </ng-container>
+
+    
+  
+    <tr mat-header-row *matHeaderRowDef="toolsColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: toolsColumns;"></tr>
+  </table>
+  
+
+
+</div>
