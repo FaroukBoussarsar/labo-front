@@ -4,13 +4,17 @@
     Create New
   </button>
 
+
+
+
+  
 </div>
 <h1 style="color:'#4554A5';font-weight: bold;margin-top: 10px;">Student </h1>
 <table mat-table [dataSource]="dataSourceEtudiant" class="mat-elevation-z8 w-100-p">
-  <ng-container matColumnDef="id">
+  <!-- <ng-container matColumnDef="id">
     <th mat-header-cell class="px-12" *matHeaderCellDef> ID</th>
     <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="cin">
     <th mat-header-cell class="px-12" *matHeaderCellDef> CIN</th>
@@ -99,10 +103,10 @@
 
 
 <table mat-table [dataSource]="dataSourceEnseignant" class="mat-elevation-z8 w-100-p">
-  <ng-container matColumnDef="id">
+  <!-- <ng-container matColumnDef="id">
     <th mat-header-cell class="px-12" *matHeaderCellDef> ID</th>
     <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="cin">
     <th mat-header-cell class="px-12" *matHeaderCellDef> CIN</th>
@@ -169,7 +173,7 @@
         <mat-icon>add_circle
         </mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="onRemoveAccount(element.id)">
+      <button mat-icon-button color="warn" (click)="onRemoveTeacherAccount(element.id)">
         <mat-icon>delete</mat-icon>
       </button>
      

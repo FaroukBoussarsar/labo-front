@@ -14,8 +14,8 @@ import { ArticleService } from 'src/services/article.service';
 export class ArticleListComponent implements OnInit {
  /** Subject that emits when the component has been destroyed. */
  protected _onDestroy = new Subject<void>();
-
- displayedColumns: string[] = ['id', 'type', 'titre', 'lien', 'sourcePdf',  'actions'];
+ type:any;
+ displayedColumns: string[] = ['id', 'type', 'titre', 'dateApparition','lien', 'sourcePdf',  'actions'];
  dataSource: Article[] = [];
 
  constructor(

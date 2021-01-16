@@ -1,7 +1,7 @@
-<div *ngIf="diffEvent">
+<div  *ngIf="allEvent.length>0">
 
-
-<p>event</p>
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">event</p>
+  
 
 
 <table mat-table [dataSource]="allEvent" class="mat-elevation-z8 w-100-p">
@@ -45,8 +45,8 @@
 
 </div>
 
-<div *ngIf="allArticle">
-    <p>article</p>
+<div *ngIf="allArticle.length>0">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">article</p>
 
      
   <table mat-table [dataSource]="allArticle" class="mat-elevation-z8 w-100-p">
@@ -104,8 +104,8 @@
 
 </div>
 
-<div *ngIf="allTools">   
-<p>tools</p>
+<div *ngIf="allTools.length>0">   
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">tools</p>
 <table mat-table [dataSource]="allTools" class="mat-elevation-z8 w-100-p">
     <ng-container matColumnDef="id">
       <th mat-header-cell class="px-12" *matHeaderCellDef> ID</th>

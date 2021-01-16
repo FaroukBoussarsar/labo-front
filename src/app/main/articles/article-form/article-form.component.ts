@@ -42,7 +42,7 @@ export class ArticleFormComponent implements OnInit {
       type: new FormControl(item?.type, [Validators.required]),
       titre: new FormControl(item?.titre, [Validators.required]),
       lien: new FormControl(item?.lien, [Validators.required]),
-
+      dateApparition: new FormControl(item?.dateApparition, [Validators.required]),
       sourcePdf: new FormControl(item?.sourcePdf, [Validators.required]),
     });
   }

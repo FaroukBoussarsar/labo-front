@@ -3,8 +3,22 @@
       <mat-icon class="s-24 mr-4">add</mat-icon>
       Create New
     </button>
-  
+    
   </div>
+  <mat-form-field appearance="fill" >
+
+
+    <mat-label>Select</mat-label>
+    <mat-select [(value)]="type">
+      <mat-option value="" disabled selected></mat-option>
+      <mat-option value="STUDENT">STUDENT</mat-option>
+      <mat-option value="TEACHER">TEACHER</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="margin-left: 10px;">
+    <input matInput placeholder="search" formControlName="search">
+  </mat-form-field>
+
   
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p">
     <ng-container matColumnDef="id">
@@ -21,6 +35,10 @@
       <td mat-cell class="px-12" *matCellDef="let element"> {{element.titre}} </td>
     </ng-container>
   
+    <ng-container matColumnDef="dateApparition">
+      <th mat-header-cell class="px-12" *matHeaderCellDef> dateApparition</th>
+      <td mat-cell class="px-12" *matCellDef="let element"> {{element.dateApparition}} </td>
+    </ng-container>
     <!-- Name Column -->
     <ng-container matColumnDef="lien">
       <th mat-header-cell class="px-12" *matHeaderCellDef> Lien</th>

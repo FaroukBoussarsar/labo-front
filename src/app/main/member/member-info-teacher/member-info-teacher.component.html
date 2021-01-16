@@ -1,17 +1,35 @@
-<p>member-info works!</p>
+<div *ngIf="enseignantItem" >
+  <mat-card class="example-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="display: flex;justify-content: space-between;">
+      <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> FULL NAME </p>
+  <p style="font-size: 24px;">{{enseignantItem.nom}} {{enseignantItem.prenom}}</p>
+
+  </div>
+
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> CIN </p>
+<p style="font-size: 24px;">{{enseignantItem.cin}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> DATE </p>
+<p style="font-size: 24px;">{{enseignantItem.date}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> EMAIL </p>
+<p style="font-size: 24px;">{{enseignantItem.email}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> GRADE </p>
+<p style="font-size: 24px;">{{enseignantItem.grade}}</p>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+    <p style="font-weight: bold; font-size: 24px;color:'#4554A5';"> ETABLISSEMENT </p>
+<p style="font-size: 24px;">{{enseignantItem.etablissement}}</p>
+  </div>
 
 
-
-<p>{{enseignantItem.nom}}</p>
-<p>{{enseignantItem.prenom}}</p>
-<p>{{enseignantItem.cin}}</p>
-<p>{{enseignantItem.date}}</p>
-<p>{{enseignantItem.email}}</p>
-<p>{{enseignantItem.grade}}</p>
-<p>{{enseignantItem.etablissement}}</p>
-
-
-<p>pubs</p>
+  <div  *ngIf="enseignantItem.pubs.length>0">
+    <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">PUBS</p>
 
 <table mat-table [dataSource]="enseignantItem.pubs" class="mat-elevation-z8 w-100-p">
    
@@ -47,8 +65,9 @@
     <tr mat-header-row *matHeaderRowDef="pubs"></tr>
     <tr mat-row *matRowDef="let row; columns: pubs;"></tr>
   </table>
-  
-<p>outils</p>
+</div>
+<div  *ngIf="enseignantItem.outils.length>0">
+<p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">outils</p>
 
 <table mat-table [dataSource]="enseignantItem.outils" class="mat-elevation-z8 w-100-p">
    
@@ -71,7 +90,9 @@
     <tr mat-header-row *matHeaderRowDef="outils"></tr>
     <tr mat-row *matRowDef="let row; columns: outils;"></tr>
   </table>
-  <p>evenements</p>
+</div>
+<div  *ngIf="enseignantItem.evenements.length>0">
+  <p style="font-weight: bold; font-size: 24px; text-align: center; margin-top: 16px;margin-bottom: 16px;color:'#4554A5';">evenements</p>
 
 <table mat-table [dataSource]="enseignantItem.evenements" class="mat-elevation-z8 w-100-p">
    
@@ -98,4 +119,7 @@
     <tr mat-header-row *matHeaderRowDef="evenements"></tr>
     <tr mat-row *matRowDef="let row; columns: evenements;"></tr>
   </table>
+</div>
+</mat-card>
+</div>
 

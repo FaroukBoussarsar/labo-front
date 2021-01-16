@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../../../../@root/components/confirm-dialog/confirm-dialog.component";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
+import { MemberPopupComponent } from '../member-popup/member-popup.component';
 
 @Component({
   selector: 'app-member-list',
@@ -15,8 +16,8 @@ export class MemberListComponent implements OnInit, OnDestroy {
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-  displayedColumnsStudent: string[] = ['id', 'cin', 'nom','prenom','date', 'cv','email','diplome','dateInscription', 'actions'];
- displayedColumnsTeacher: string[] = ['id', 'cin', 'nom','prenom','date', 'cv','email','grade','etablissement', 'actions'];
+  displayedColumnsStudent: string[] = [ 'cin', 'nom','prenom','date', 'cv','email','diplome','dateInscription', 'actions'];
+ displayedColumnsTeacher: string[] = [ 'cin', 'nom','prenom','date', 'cv','email','grade','etablissement', 'actions'];
   dataSourceEtudiant: MemberEtudiant[] = [];
   dataSourceEnseignant: MemberEnseignant[] = [];
 
@@ -44,6 +45,21 @@ export class MemberListComponent implements OnInit, OnDestroy {
    
 
   }
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MemberPopupComponent, {
+     
+       hasBackdrop: true,
+      disableClose: false,
+     
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+     
+    });
+  }
 
   onRemoveAccount(id: any): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -57,6 +73,30 @@ export class MemberListComponent implements OnInit, OnDestroy {
 
       if (isDeleteConfirmed) {
         this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
+      }
+    });
+  }
+
+  onRemoveTeacherAccount(id: any): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      hasBackdrop: true,
+      disableClose: false,
+    });
+
+    dialogRef.componentInstance.confirmButtonColor = 'warn';
+
+    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
+
+      if (isDeleteConfirmed) {
+        this.memberService.removeTeacherById(id).then((item) => {console.log(item);
+          if(item){
+            this.openDialog()
+          }
+          else{
+            this.fetchDataSource()
+          }
+
+        });
       }
     });
   }

@@ -3,7 +3,7 @@ export interface Article {
   type: string,
   titre: string,
   lien: string,
-  date: string,
+  dateApparition: string,
   sourcePdf: string,
 
 }

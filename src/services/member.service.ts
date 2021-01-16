@@ -133,5 +133,10 @@ return this.httpClient.get<Article[]>(`http://localhost:9999/membreservice/publi
 //   this.placeholderMembers.filter(item => item.id === id)[0] ?? null
 // ));
 }
+removeTeacherById(id: string): Promise<Boolean> {
+  return this.httpClient.delete<Boolean>(`http://localhost:9999/membreservice/membres/teacher/${id}`).toPromise();
+ // this.placeholderMembers = this.placeholderMembers.filter(item => item.id !== id);
+ // return new Promise(resolve => resolve());
+}
 
 }

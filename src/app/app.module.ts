@@ -23,6 +23,7 @@ import { MemberInfoComponent } from './main/member/member-info/member-info.compo
 import { MemberInfoTeacherComponent } from './main/member/member-info-teacher/member-info-teacher.component';
 import { MemberAddComponent } from './main/member/member-add/member-add.component';
 import { MemberEncadrantComponent } from './main/member/member-encadrant/member-encadrant.component';
+import { MemberPopupComponent } from './main/member/member-popup/member-popup.component';
 
 
 
@@ -44,6 +45,7 @@ import { MemberEncadrantComponent } from './main/member/member-encadrant/member-
     MemberInfoTeacherComponent,
     MemberAddComponent,
     MemberEncadrantComponent,
+    MemberPopupComponent,
 
 
   ],

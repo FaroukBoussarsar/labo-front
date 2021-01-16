@@ -48,13 +48,13 @@ export class MemberAddComponent implements OnInit {
     
 
     this.memberService.findEventdiifById(this.currentItemId).then(item=>{this.allEvent=item
-      console.log(item,'first');
+      console.log(item,'event');
       })
       this.memberService.findArticlediifById(this.currentItemId).then(item=>{this.allArticle=item
-        console.log(item,'first');
+        console.log(item,'article');
         })
         this.memberService.findOutilsdiifById(this.currentItemId).then(item=>{this.allTools=item
-          console.log(item,'first');
+          console.log(item,'tool');
           })
 
 

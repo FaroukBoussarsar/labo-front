@@ -9,7 +9,7 @@ import { Article } from 'src/models/article.model';
   providedIn: 'root'
 })
 export class ArticleService {
-  public placeholderArticles: Article[] = GLOBAL._DB.articles;
+
 
   constructor(
     private httpClient: HttpClient,
