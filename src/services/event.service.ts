@@ -51,4 +51,14 @@ export class EventService {
     // return new Promise(resolve => resolve());
   }
 
+  findEventLieu(id: string): Promise<Event[]> {
+    return this.httpClient.get<Event[]>(`http://localhost:9999/evenementservice/evenements/lieu/${id}`).toPromise();
+   
+  }
+  findEventTitle(id: any): Promise<Event[]> {
+    return this.httpClient.get<Event[]>(`http://localhost:9999/evenementservice/evenements/title/${id}`).toPromise();
+   
+  }
+
+
 }

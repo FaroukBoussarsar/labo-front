@@ -5,20 +5,35 @@
     </button>
     
   </div>
+   
+<div fxLayout="row" fxLayoutAlign="start center" >
   <mat-form-field appearance="fill" >
-
-
+  
+  
     <mat-label>Select</mat-label>
     <mat-select [(value)]="type">
-      <mat-option value="" disabled selected></mat-option>
-      <mat-option value="STUDENT">STUDENT</mat-option>
-      <mat-option value="TEACHER">TEACHER</mat-option>
+      <mat-option value=" " disabled selected></mat-option>
+      <mat-option value="TYPE">TYPE</mat-option>
+      <mat-option value="TITLE">TITLE</mat-option>
+      <mat-option value="LIEN">LIEN</mat-option>
+  
     </mat-select>
   </mat-form-field>
-  <mat-form-field style="margin-left: 10px;">
-    <input matInput placeholder="search" formControlName="search">
+  <mat-form-field *ngIf="type!==''" style="margin-left: 10px;">
+    <input matInput 
+    
+    placeholder="searchInput"
+    
+    [(ngModel)]="searchInput" (change)="emailUpdated($event)"
+     >
   </mat-form-field>
+ 
+   <button *ngIf="type!==''" mat-raised-button (click)="search()" > <mat-icon class="s-24 mr-4">search</mat-icon></button>
+   <button *ngIf="type!==''" color="warn" mat-raised-button  (click)="clear()" > <mat-icon class="s-24 mr-4">clear</mat-icon></button>
+  
+  </div>
 
+  <div *ngIf="dataSource.length>0">
   
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p">
     <ng-container matColumnDef="id">
@@ -78,4 +93,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  
+</div>

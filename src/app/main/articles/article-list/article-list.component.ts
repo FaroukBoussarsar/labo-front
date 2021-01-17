@@ -14,7 +14,9 @@ import { ArticleService } from 'src/services/article.service';
 export class ArticleListComponent implements OnInit {
  /** Subject that emits when the component has been destroyed. */
  protected _onDestroy = new Subject<void>();
- type:any;
+
+ type:string=''
+ searchInput:string=''
  displayedColumns: string[] = ['id', 'type', 'titre', 'dateApparition','lien', 'sourcePdf',  'actions'];
  dataSource: Article[] = [];
 
@@ -32,11 +34,66 @@ export class ArticleListComponent implements OnInit {
  ngOnInit(): void {
    this.fetchDataSource();
  }
-
+ emailUpdated(event) {
+  console.log("New email", event.target.value);
+  this.searchInput=event.target.value
+}
+clear(){
+  this.fetchDataSource()
+}
  private fetchDataSource(): void {
    this.articleService.getAllArticles().then(data => this.dataSource = data);
  }
+ search(){
+  console.log(this.searchInput);
+  let dataa=[]
+  
 
+  if(this.type==='TYPE'){
+    
+  this.articleService.getAllArticles().then(data=>{
+    data.map(item =>{
+      if(item.type.includes(this.searchInput)){
+            console.log('i am here type');
+            dataa.push(item)
+      }
+    })
+  })
+     
+
+  }
+  else if(this.type==='TITLE'){
+    
+    this.articleService.getAllArticles().then(data=>{
+      data.map(item =>{
+        console.log(item.titre);
+        
+        if(item.titre.includes(this.searchInput)){
+          console.log('i am here Title');
+          
+          dataa.push(item)
+        }
+      })
+    })
+  }
+  else if(this.type==='LIEN'){
+    
+    this.articleService.getAllArticles().then(data=>{
+      data.map(item =>{
+        if(item.lien.includes(this.searchInput)){
+          console.log('i am here Lien');
+          dataa.push(item)
+        }
+      })
+    })
+  }
+ console.log(dataa);
+ this.dataSource=dataa
+ console.log(this.dataSource);
+ 
+// this.dataSource=
+  
+}
  onRemoveAccount(id: any): void {
    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
      hasBackdrop: true,

@@ -15,7 +15,8 @@ export class EventsListComponent implements OnInit {
 
  /** Subject that emits when the component has been destroyed. */
  protected _onDestroy = new Subject<void>();
-
+ type:string=''
+  searchInput:string=''
  displayedColumns: string[] = ['id', 'title', 'lieu', 'date', 'actions'];
  dataSource: Event[] = [];
 
@@ -33,10 +34,35 @@ export class EventsListComponent implements OnInit {
  ngOnInit(): void {
    this.fetchDataSource();
  }
-
+ emailUpdated(event) {
+  console.log("New email", event.target.value);
+  this.searchInput=event.target.value
+}
+clear(){
+  this.fetchDataSource()
+}
  private fetchDataSource(): void {
    this.eventService.getAllEvents().then(data => this.dataSource = data);
  }
+ search(){
+  console.log(this.searchInput);
+  
+  if(this.type==='LIEU'){
+  this.eventService.findEventLieu(this.searchInput).then(data=>{
+    this.dataSource=data
+  })
+     
+
+  }
+  else if(this.type==='TITLE'){
+    this.eventService.findEventTitle(this.searchInput).then(data=>{
+      this.dataSource=data
+    })
+  }
+ 
+
+  
+}
 
  onRemoveAccount(id: any): void {
    const dialogRef = this.dialog.open(ConfirmDialogComponent, {

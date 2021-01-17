@@ -15,8 +15,10 @@ import { MemberPopupComponent } from '../member-popup/member-popup.component';
 export class MemberListComponent implements OnInit, OnDestroy {
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
-
+  type:string=''
+  searchInput:string=''
   displayedColumnsStudent: string[] = [ 'cin', 'nom','prenom','date', 'cv','email','diplome','dateInscription', 'actions'];
+  displayedColumns: string[] = [ 'cin', 'nom','prenom','date', 'cv','email', 'actions'];
  displayedColumnsTeacher: string[] = [ 'cin', 'nom','prenom','date', 'cv','email','grade','etablissement', 'actions'];
   dataSourceEtudiant: MemberEtudiant[] = [];
   dataSourceEnseignant: MemberEnseignant[] = [];
@@ -44,6 +46,102 @@ export class MemberListComponent implements OnInit, OnDestroy {
     
    
 
+  }
+
+  emailUpdated(event) {
+    console.log("New email", event.target.value);
+    this.searchInput=event.target.value
+  }
+  clear(){
+    this.fetchDataSource()
+  }
+
+  search(){
+    console.log(this.searchInput);
+    
+    if(this.type==='CIN'){
+    
+        this.memberService.findByCin(this.searchInput).then(data=>{
+          this.dataSourceEtudiant=[]
+          this.dataSourceEnseignant=[]
+          if(data.diplome!==''&&!data.etablissement){
+            this.dataSourceEtudiant.push(data)
+            console.log(data);
+            
+          }
+          if(data.etablissement){
+            this.dataSourceEnseignant.push(data)
+            console.log(data);
+          }
+        })
+
+    }
+    else if(this.type==='EMAIL'){
+
+      this.memberService.findbyEmail(this.searchInput).then(data=>{
+        this.dataSourceEtudiant=[]
+        this.dataSourceEnseignant=[]
+        if(data.diplome!==''&&!data.etablissement){
+          this.dataSourceEtudiant.push(data)
+          console.log(data);
+          
+        }
+        if(data.etablissement){
+          this.dataSourceEnseignant.push(data)
+          console.log(data);
+        }
+      })
+
+    }
+    else if(this.type==='NAME'){
+      this.memberService.findbyNom(this.searchInput).then(data =>{ 
+        this.dataSourceEtudiant=[]
+        this.dataSourceEnseignant=[]
+data.map(item=>{this.displayedColumns=item
+  if(item.diplome!==''&&!item.etablissement){
+    this.dataSourceEtudiant.push(item)
+    console.log(item);
+    
+  }
+  if(item.etablissement){
+    this.dataSourceEnseignant.push(item)
+    console.log(item);
+  }
+})
+
+    //    this.dataSourceEtudiant=data
+      
+      } );
+     
+      
+    }
+    else if(this.type==='DIPLOME'){
+
+      this.memberService.findbydiplome(this.searchInput).then(data=>{
+        this.dataSourceEtudiant=data
+        this.dataSourceEnseignant=[]
+        
+      })
+      
+    }
+    else if(this.type==='GRADE'){
+      this.memberService.findByGrade(this.searchInput).then(data=>{
+        this.dataSourceEtudiant=[]
+        this.dataSourceEnseignant=data
+        
+      })
+      
+    }
+    else if(this.type==='ETABLISSEMENT'){
+      this.memberService.findByEtablissement(this.searchInput).then(data=>{
+        this.dataSourceEtudiant=[]
+        this.dataSourceEnseignant=data
+        
+      })
+      
+    }
+
+    
   }
   
   openDialog(): void {

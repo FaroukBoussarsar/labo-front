@@ -16,7 +16,8 @@ import { ToolService } from 'src/services/tool.service';
 export class ToolsListComponent implements OnInit {
  /** Subject that emits when the component has been destroyed. */
  protected _onDestroy = new Subject<void>();
-
+ type:string='SOURCE'
+  searchInput:string=''
  displayedColumns: string[] = ['id',   'source','date','actions'];
  dataSource: Tool[] = [];
 
@@ -34,10 +35,34 @@ export class ToolsListComponent implements OnInit {
  ngOnInit(): void {
    this.fetchDataSource();
  }
+ emailUpdated(event) {
+  console.log("New email", event.target.value);
+  this.searchInput=event.target.value
+}
+clear(){
+  this.fetchDataSource()
+}
 
  private fetchDataSource(): void {
    this.toolService.getAllTools().then(data => this.dataSource = data);
  }
+ search(){
+  console.log(this.searchInput);
+  this.dataSource=[]
+  if(this.type==='SOURCE'){
+ 
+    this.toolService.getAllTools().then(data =>{
+data.map(item=>{
+  if(item.source===this.searchInput){
+this.dataSource.push(item)
+  }
+})
+    })
+  }
+  
+
+  
+}
 
  onRemoveAccount(id: any): void {
    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
