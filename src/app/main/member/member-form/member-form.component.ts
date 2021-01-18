@@ -17,6 +17,8 @@ export class MemberFormComponent implements OnInit {
   formTeacher: FormGroup;
   form:FormGroup;
   type:any;
+  url:any = '';
+
 
   constructor(
     private router: Router,
@@ -93,16 +95,25 @@ export class MemberFormComponent implements OnInit {
     return !!this.currentItemId;
   }
 
-  onSubmit(): void {
-    // const objectToSubmit: Member = {...this.item, ...this.form.value};
-    // console.log(objectToSubmit);
-    // if(this.type==='TEACHER'){
-    //   this.memberService.saveEns(objectToSubmit).then(() => this.router.navigate(['./members']));
-    // }
-    // else{
-    //   this.memberService.saveEtd(objectToSubmit).then(() => this.router.navigate(['./members']));
-    // }
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
 
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+        console.log(this.url);
+        
+        
+        
+      }
+    }
+  }
+  onSubmit(): void {
+  //  const a = {...this.item,...this.form.value, ...this.formTeacher.value,...{photo:this.url}}
+  //  console.log(a);
+   
     if(this.type==='TEACHER'){
       const objectToSubmit: MemberEnseignant  = {...this.item,...this.form.value, ...this.formTeacher.value};
 

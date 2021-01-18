@@ -28,8 +28,15 @@
       <input matInput placeholder="email" formControlName="email">
     </mat-form-field>
 
+<!-- 
+      <input  type='file' (change)="onSelectFile($event)" >
 
-    <mat-form-field appearance="fill" >
+
+
+<input type='file' (change)="onSelectFile($event)">
+
+<img [src]="url" height="200px" width="200px"> <br/> -->
+    <mat-form-field appearance="fill" *ngIf="!currentItemId" >
 
 
       <mat-label>Select</mat-label>
@@ -39,11 +46,22 @@
         <mat-option value="TEACHER">TEACHER</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="fill" *ngIf="!!currentItemId" >
+
+
+      <mat-label>Select</mat-label>
+      <mat-select [(value)]="type">
+        <mat-option value="" disabled selected></mat-option>
+        <mat-option value="STUDENT" disabled>STUDENT</mat-option>
+        <mat-option value="TEACHER" disabled>TEACHER</mat-option>
+      </mat-select>
+    </mat-form-field>
   
     <form [formGroup]="formTeacher"  (ngSubmit)="onSubmit()" class="form" fxLayout="column">
     <mat-form-field *ngIf="type==='TEACHER'">
       <input matInput placeholder="grade" formControlName="grade">
     </mat-form-field>
+    
     
     <mat-form-field  *ngIf="type==='TEACHER'">
       <input matInput placeholder="etablissement" formControlName="etablissement">
