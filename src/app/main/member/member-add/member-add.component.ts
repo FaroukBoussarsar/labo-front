@@ -48,44 +48,16 @@ export class MemberAddComponent implements OnInit {
     
 
     this.memberService.findEventdiifById(this.currentItemId).then(item=>{this.allEvent=item
-      console.log(item,'event');
+     
       })
       this.memberService.findArticlediifById(this.currentItemId).then(item=>{this.allArticle=item
-        console.log(item,'article');
+     
         })
         this.memberService.findOutilsdiifById(this.currentItemId).then(item=>{this.allTools=item
-          console.log(item,'tool');
+         
           })
 
 
-//     this.memberService.findEventById(this.currentItemId).then(item=>{this.event=item
-//     console.log(item,'first');
-//     })
-  
-//     this.eventService.getAllEvents().then(item=>{this.allEvent=item
-      
-      
-    
-//       })
-
-
-//     this.memberService.findArticleById(this.currentItemId).then(item=>this.article=item)
-
-//     this.memberService.findOutilsById(this.currentItemId).then(item=>this.tool=item)
-
-//     this.toolService.getAllTools().then(item=>this.allTools=item)
-
-//     this.articleService.getAllArticles().then(item=>this.allArticle=item)
-// this.diffEvent=this.allEvent.filter(x => !this.event.includes(x));
-// console.log(this.diffEvent,'result');
-
-//   }
-//    comparer(otherArray){
-//     return function(current){
-//       return otherArray.filter(function(other){
-//         return other.value == current.value && other.display == current.display
-//       }).length == 0;
-//     }
   }
 
   onSubmitTools(id:any){

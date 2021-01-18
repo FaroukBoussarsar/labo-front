@@ -47,97 +47,145 @@ export class MemberListComponent implements OnInit, OnDestroy {
    
 
   }
+  fetch(){
+this.search()
+    
 
+  }
   emailUpdated(event) {
-    console.log("New email", event.target.value);
+   
     this.searchInput=event.target.value
   }
   clear(){
-    this.fetchDataSource()
+    this.searchInput=''
+    this.fetchDataSource();
   }
 
   search(){
-    console.log(this.searchInput);
+   
     
     if(this.type==='CIN'){
     
-        this.memberService.findByCin(this.searchInput).then(data=>{
+       
           this.dataSourceEtudiant=[]
           this.dataSourceEnseignant=[]
-          if(data.diplome!==''&&!data.etablissement){
-            this.dataSourceEtudiant.push(data)
-            console.log(data);
-            
-          }
-          if(data.etablissement){
-            this.dataSourceEnseignant.push(data)
-            console.log(data);
-          }
-        })
+
+          this.memberService.getAllEtd().then(data=>{
+            data.map(item=>{
+              if(item.cin.toLowerCase().includes(this.searchInput.toLowerCase())){
+                this.dataSourceEtudiant.push(item)
+              }
+            })
+          })
+
+          this.memberService.getAllEns().then(data=>{
+            data.map(item=>{
+              if(item.cin.toLowerCase().includes(this.searchInput.toLowerCase())){
+                this.dataSourceEnseignant.push(item)
+              }
+            })
+          })
+
+        
+     
 
     }
     else if(this.type==='EMAIL'){
+      this.dataSourceEtudiant=[]
+      this.dataSourceEnseignant=[]
 
-      this.memberService.findbyEmail(this.searchInput).then(data=>{
-        this.dataSourceEtudiant=[]
-        this.dataSourceEnseignant=[]
-        if(data.diplome!==''&&!data.etablissement){
-          this.dataSourceEtudiant.push(data)
-          console.log(data);
-          
-        }
-        if(data.etablissement){
-          this.dataSourceEnseignant.push(data)
-          console.log(data);
-        }
+     
+      this.memberService.getAllEtd().then(data=>{
+        data.map(item=>{
+          if(item.email.toLowerCase().includes(this.searchInput.toLowerCase())){
+            this.dataSourceEtudiant.push(item)
+          }
+        })
       })
 
-    }
-    else if(this.type==='NAME'){
-      this.memberService.findbyNom(this.searchInput).then(data =>{ 
-        this.dataSourceEtudiant=[]
-        this.dataSourceEnseignant=[]
-data.map(item=>{this.displayedColumns=item
-  if(item.diplome!==''&&!item.etablissement){
-    this.dataSourceEtudiant.push(item)
-    console.log(item);
-    
-  }
-  if(item.etablissement){
-    this.dataSourceEnseignant.push(item)
-    console.log(item);
-  }
-})
+      this.memberService.getAllEns().then(data=>{
+        data.map(item=>{
+          if(item.email.toLowerCase().includes(this.searchInput.toLowerCase())){
+            this.dataSourceEnseignant.push(item)
+          }
+        })
+      })
 
-    //    this.dataSourceEtudiant=data
-      
-      } );
+     
+
+    }
+    else if(this.type==='FULLNAME'){
+      this.dataSourceEtudiant=[]
+      this.dataSourceEnseignant=[]
+
+     
+      this.memberService.getAllEtd().then(data=>{
+        data.map(item=>{
+          let str =item.nom+' '+item.prenom
+          if(str.toLowerCase().includes(this.searchInput.toLowerCase())){
+            this.dataSourceEtudiant.push(item)
+          }
+        })
+      })
+
+      this.memberService.getAllEns().then(data=>{
+        data.map(item=>{
+          let str =item.nom+' '+item.prenom
+          if(str.toLowerCase().includes(this.searchInput.toLowerCase())){
+            this.dataSourceEnseignant.push(item)
+          }
+        })
+      })
+
      
       
     }
     else if(this.type==='DIPLOME'){
+      this.dataSourceEtudiant=[]
+      this.dataSourceEnseignant=[]
 
-      this.memberService.findbydiplome(this.searchInput).then(data=>{
-        this.dataSourceEtudiant=data
-        this.dataSourceEnseignant=[]
-        
+     
+      this.memberService.getAllEtd().then(data=>{
+        data.map(item=>{
+          if(item.diplome.toLowerCase().includes(this.searchInput.toLowerCase())){
+            this.dataSourceEtudiant.push(item)
+          }
+        })
       })
+
+     
+
       
     }
     else if(this.type==='GRADE'){
-      this.memberService.findByGrade(this.searchInput).then(data=>{
-        this.dataSourceEtudiant=[]
-        this.dataSourceEnseignant=data
-        
+      this.dataSourceEtudiant=[]
+      this.dataSourceEnseignant=[]
+
+    
+
+      this.memberService.getAllEns().then(data=>{
+        data.map(item=>{
+          if(item.grade.toLowerCase().includes(this.searchInput.toLowerCase())){
+            this.dataSourceEnseignant.push(item)
+          }
+        })
       })
+
       
     }
     else if(this.type==='ETABLISSEMENT'){
-      this.memberService.findByEtablissement(this.searchInput).then(data=>{
-        this.dataSourceEtudiant=[]
-        this.dataSourceEnseignant=data
-        
+      this.dataSourceEtudiant=[]
+      this.dataSourceEnseignant=[]
+
+    
+      this.memberService.getAllEns().then(data=>{
+        data.map(item=>{
+          if(item.etablissement.toLowerCase().includes(this.searchInput.toLowerCase())){
+            this.dataSourceEnseignant.push(item)
+          }
+        })
       })
+
       
     }
 

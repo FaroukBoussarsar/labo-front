@@ -34,18 +34,24 @@ export class ArticleListComponent implements OnInit {
  ngOnInit(): void {
    this.fetchDataSource();
  }
+ fetch(){
+  this.search()
+      
+  
+    }
  emailUpdated(event) {
-  console.log("New email", event.target.value);
+ 
   this.searchInput=event.target.value
 }
 clear(){
-  this.fetchDataSource()
+  this.searchInput=''
+  this.fetchDataSource();
 }
  private fetchDataSource(): void {
    this.articleService.getAllArticles().then(data => this.dataSource = data);
  }
  search(){
-  console.log(this.searchInput);
+ 
   let dataa=[]
   
 
@@ -53,8 +59,8 @@ clear(){
     
   this.articleService.getAllArticles().then(data=>{
     data.map(item =>{
-      if(item.type.includes(this.searchInput)){
-            console.log('i am here type');
+      if(item.type.toLowerCase().includes(this.searchInput.toLowerCase())){
+  
             dataa.push(item)
       }
     })
@@ -66,10 +72,10 @@ clear(){
     
     this.articleService.getAllArticles().then(data=>{
       data.map(item =>{
-        console.log(item.titre);
+       
         
-        if(item.titre.includes(this.searchInput)){
-          console.log('i am here Title');
+        if(item.titre.toLowerCase().includes(this.searchInput.toLowerCase())){
+         
           
           dataa.push(item)
         }
@@ -80,18 +86,18 @@ clear(){
     
     this.articleService.getAllArticles().then(data=>{
       data.map(item =>{
-        if(item.lien.includes(this.searchInput)){
-          console.log('i am here Lien');
+        if(item.lien.toLowerCase().includes(this.searchInput.toLowerCase())){
+        
           dataa.push(item)
         }
       })
     })
   }
- console.log(dataa);
+
  this.dataSource=dataa
- console.log(this.dataSource);
+
  
-// this.dataSource=
+
   
 }
  onRemoveAccount(id: any): void {

@@ -30,33 +30,51 @@ export class EventsListComponent implements OnInit {
    this._onDestroy.next();
    this._onDestroy.complete();
  }
-
+ fetch(){
+  this.search()
+      
+  
+    }
  ngOnInit(): void {
    this.fetchDataSource();
  }
  emailUpdated(event) {
-  console.log("New email", event.target.value);
+
   this.searchInput=event.target.value
 }
 clear(){
-  this.fetchDataSource()
+  this.searchInput=''
+    this.fetchDataSource();
 }
  private fetchDataSource(): void {
    this.eventService.getAllEvents().then(data => this.dataSource = data);
  }
  search(){
-  console.log(this.searchInput);
+
   
   if(this.type==='LIEU'){
-  this.eventService.findEventLieu(this.searchInput).then(data=>{
-    this.dataSource=data
+
+  this.dataSource=[]
+this.eventService.getAllEvents().then(data=>{
+  data.map(item=>{
+    if(item.lieu.toLowerCase().toLowerCase().includes(this.searchInput.toLowerCase())){
+      this.dataSource.push(item)
+    }
   })
+})
+
      
 
   }
   else if(this.type==='TITLE'){
-    this.eventService.findEventTitle(this.searchInput).then(data=>{
-      this.dataSource=data
+   
+    this.dataSource=[]
+    this.eventService.getAllEvents().then(data=>{
+      data.map(item=>{
+        if(item.title.toLowerCase().toLowerCase().includes(this.searchInput.toLowerCase())){
+          this.dataSource.push(item)
+        }
+      })
     })
   }
  

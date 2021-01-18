@@ -36,24 +36,30 @@ export class ToolsListComponent implements OnInit {
    this.fetchDataSource();
  }
  emailUpdated(event) {
-  console.log("New email", event.target.value);
+
   this.searchInput=event.target.value
 }
+fetch(){
+  this.search()
+      
+  
+    }
 clear(){
-  this.fetchDataSource()
+  this.searchInput=''
+  this.fetchDataSource();
 }
 
  private fetchDataSource(): void {
    this.toolService.getAllTools().then(data => this.dataSource = data);
  }
  search(){
-  console.log(this.searchInput);
+
   this.dataSource=[]
   if(this.type==='SOURCE'){
  
     this.toolService.getAllTools().then(data =>{
 data.map(item=>{
-  if(item.source===this.searchInput){
+  if(item.source.toLowerCase().includes(this.searchInput.toLowerCase())){
 this.dataSource.push(item)
   }
 })
